@@ -5,7 +5,11 @@
   - Zero dependencies
   - Zero network requirements
 
-This BuenoCache example persists a collection of _user-objects_ in an IndexedDB    
+### 100K user objects
+
+### Instantanious ordering, filtering, pagination of 100K users
+
+This BuenoCache example persists a collection of 100k _user-objects_ in an IndexedDB    
   - Note: this cache service with proper transactions in place, will work with almost any persitence service.  I've used localStorage, IndexedDB, SQLite, and DenoKv.  To insure a _consistent cache_, all DB-mutations must be wrapped in a transaction. 
 
 ![alt text](table.png)
