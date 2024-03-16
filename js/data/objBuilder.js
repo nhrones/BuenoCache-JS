@@ -1,4 +1,4 @@
-// deno-lint-ignore-file
+
 const usersJson = await (await fetch(new URL("../data/hundredK.json", import.meta.url))).json()
 
 /**

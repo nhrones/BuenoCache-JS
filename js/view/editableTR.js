@@ -1,19 +1,18 @@
+
 import { $, buenoCache } from '../main.js'
 
-/**
- * @type {HTMLTableRowElement}
- */
+/** @type {HTMLTableRowElement | null} */
 export let focusedRow
-/**
- * @type {EventTarget}
- */
+
+/** @type {HTMLTableCellElement} */
 export let focusedCell
+
 export let selectedRowID = 0
 
 export const resetFocusedRow = () => {
     const dbtn = $('deletebtn')
     dbtn?.setAttribute('hidden', '')
-    //@ts-ignore ?
+
     focusedRow = null
 }
 
@@ -27,14 +26,12 @@ export function makeEditableRow() {
         }
 
         row.onclick = (e) => {
-
-            const target = e.target //as HTMLTableCellElement
+            
+            /** @type {HTMLTableCellElement} */
+            const target = /** @type {HTMLTableCellElement} */(e.target)
             if (focusedRow && focusedCell && (e.target != focusedCell)) {
-               //@ts-ignore 
                focusedCell.removeAttribute('contenteditable')
-               //@ts-ignore 
                 focusedCell.className = ""
-                //@ts-ignore 
                 focusedCell.oninput = null
             }
 
@@ -42,36 +39,29 @@ export function makeEditableRow() {
             focusedRow = row
             selectedRowID = parseInt(focusedRow.dataset.row_id+'')
             focusedRow.classList.add("selected_row")
-            const dbtn = $('deletebtn')
-            //@ts-ignore 
+            const dbtn = /**@type {HTMLButtonElement} */($('deletebtn'))
+
             dbtn.removeAttribute('hidden')
 
             // we don't allow editing readonly cells
-            //@ts-ignore 
             if (target.attributes.getNamedItem('read-only')) {
                 return // skip all read-only columns
             }
-            //@ts-ignore 
-            focusedCell = e.target
-            //@ts-ignore
+    
+            focusedCell = /** @type {HTMLTableCellElement} */(e.target)
             focusedCell.setAttribute('contenteditable', '')
-            //@ts-ignore
             focusedCell.className = "editable "
-            //@ts-ignore
             focusedCell.onblur = () => {
-                const id = parseInt(focusedRow.dataset.row_id+'')
-                //@ts-ignore
+                const id = parseInt(/**@type {HTMLTableRowElement}*/(focusedRow).dataset.row_id+'')
                 const col = focusedCell.dataset.column_id || 0
                 const rowObj = buenoCache.get(id)
                 const currentValue = rowObj[col]
-                //@ts-ignore
                 const newValue = focusedCell.textContent
                 if (currentValue != newValue) {
                     rowObj[col] = newValue
                     buenoCache.set(id, rowObj)
                 }
             }
-            //@ts-ignore
             focusedCell.focus()
         }
     }

@@ -1,4 +1,3 @@
-// deno-lint-ignore-file
 
 import { buildDataTable } from '../view/domDataTable.js'
 import {buenoCache } from '../main.js'

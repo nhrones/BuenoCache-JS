@@ -1,19 +1,9 @@
-// deno-lint-ignore-file
+
 import { buildTestDataSet } from './objBuilder.js'
 import { paginateData } from './paginate.js'
 import { buildDataTable } from '../view/domDataTable.js'
 
-// import type {
-//    DbRpcPackage,
-//    dbOptions,
-//    callback,
-//    column,
-//    ObjectLiteral,
-//    schema
-// } from './types.ts'
-
 const LOG = true
-
 
 //==========================================================
 //                     Bueno-Cache
@@ -49,22 +39,26 @@ export class BuenoCache {
    querySet = []
    callbacks
 
-   /** the web-worker that this instance communicates with */
+   /** 
+    * the web-worker that this instance communicates with
+    *
+    * @type {Worker}
+    */
    idbWorker
    size = 0
+   /** @type {string | any[]} */
    columns = []
    dbMap = new Map()
-   /**
-    * @type {any[]}
-    */
+   /** @type {any[]} */
    raw = []
    currentPage = 1
    rows = 10
    window = 10
 
-   //  BuenoCache ctor
    /**
-    * @param {{ schema: any; size: any; }} opts
+    *  BuenoCache ctor
+    * @param {{ schema: {  name: string, sample: {[key: string]: any}
+    * }, size: number; }} opts
     */
    constructor(opts) {
       this.IDB_KEY = `${opts.schema.name}-${opts.size}`
@@ -107,7 +101,8 @@ export class BuenoCache {
    }  // ctor end
 
    /**
-    * extract a set of column-schema from the DB.schema object 
+    * extract a set of column-schema from the DB.schema object
+    * @param {{ [s: string]: any; } | ArrayLike<any>} obj
     */
    buildColumnSchema(obj) {
       let columns = []
@@ -131,7 +126,7 @@ export class BuenoCache {
     * Persist the current dbMap to an IndexedDB using         
     * our webworker. (takes ~ 90 ms for 100k records)    
     * This is called for any mutation of the dbMap (set/delete)
-    * @param {Map<any, any>} map
+    * @param {Map<string, any>} map
     */
    async persist(map) {
       console.log(`typeof map: ${typeof map}`)
@@ -150,8 +145,6 @@ export class BuenoCache {
       buildTestDataSet(this.size).
          then(async (val) => {
             console.log(`MissingData value type: ${typeof val}`)
-            //this.persist(val)
-            //return await this.postMessage({ procedure: 'GET', key: this.IDB_KEY })
          })
    }
 
@@ -210,18 +203,14 @@ export class BuenoCache {
       for (const key of map.keys()) {
          if (typeof key === 'string')
             if (partial) {
-               //@ts-ignore ?
                if (key.startsWith(value)) return map.get(key)
             } else {
-               //@ts-ignore ?
                if (key === value) return map.get(key)
             }
       };
       return `${value} not found!`
    }
 
-   /* find an object from a number key */
-   
    /**
     * find an object from a number key
     *
@@ -231,8 +220,7 @@ export class BuenoCache {
     */
    findNumber(map, value) {
       for (const key of map.keys()) {
-         //@ts-ignore ?
-         if (key === value) return map.get(key)
+         if (key === value) return map.get(key) ?? []
       };
       return `${value} not found!`
    }
