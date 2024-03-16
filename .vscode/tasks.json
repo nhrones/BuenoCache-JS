@@ -1,0 +1,16 @@
+{
+   "version": "2.0.0",
+   "tasks": [
+      {
+         "label": "RUN",
+         "type": "shell",
+         "command": "serve",
+         "problemMatcher": []
+      },      
+      {
+         "label": "SURGE",
+         "type": "shell",
+         "command": "surge --project ./ --domain bueno-cache.surge.sh"
+      }
+   ]
+}
