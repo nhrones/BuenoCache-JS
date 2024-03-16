@@ -2,10 +2,13 @@
 ## A _LocalFirst_ example application
   - Pure vanilla HTML, CSS, js application
   - Local async IDB persistence layer
-  - Zero dependencies - Zero network requirements
+  - Zero dependencies
+  - Zero network requirements
 
 This BuenoCache example persists a collection of _user-objects_ in an IndexedDB    
   - Note: this cache service with proper transactions in place, will work with almost any persitence service.  I've used localStorage, IndexedDB, SQLite, and DenoKv.  To insure a _consistent cache_, all DB-mutations must be wrapped in a transaction. 
+
+![alt text](table.png)
 
 ### Click the link below to run this demo:   
 
@@ -47,12 +50,10 @@ worker.onmessage(hundredK) =>
 worker postMessage(id, value = JSON.stringify([...buenoCache.entries()]))
 ```
 
-## Note: 
-This app has been bundled with esBuild (automatically in HotServe)!    
-The app prefers to run from **_Hot-Serve_** https://github.com/nhrones/Hot     
-It will also run from any other dev server.     
-
 ## Observed performance
+
+ ![alt text](buenoCache.png)
+
 You can appreciate the performance of this persisted cache, by deleting the IndexedDB     
 dataset while the app is running.    
 On the next mutation operation of buenoCache, the app will reconstruct the IndexedDB row.   
