@@ -1,12 +1,16 @@
 # BuenoCache
+## A _LocalFirst_ example application
+  - Pure vanilla HTML, CSS, js application
+  - Local async IDB persistence layer
+  - Zero dependencies - Zero network requirements
 
 This BuenoCache example persists a collection of _user-objects_ in an IndexedDB    
-  - Note: this cache service with proper transactions in place, will work with almost any persitence service.  I've used localStorage, IndexedDB, SQLite, and DenoKv.  To insure consistent cache, all DB-mutations must be wrapped in a transaction. 
+  - Note: this cache service with proper transactions in place, will work with almost any persitence service.  I've used localStorage, IndexedDB, SQLite, and DenoKv.  To insure a _consistent cache_, all DB-mutations must be wrapped in a transaction. 
 
 ### Click the link below to run this demo:   
 
 https://bueno-cache.surge.sh    
-  - This will run the app from Github Pages.    
+  - This will run the app from Surge.    
   - The app will first build then hydrate an IndexedDB -> workDB -> ObjectStore    
   - Any mutation of the data will be consistently persisted to this ObjectStore
 
