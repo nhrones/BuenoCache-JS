@@ -7,12 +7,13 @@
 ![alt text](LocalFirst.png)
 
 
-### 100K user objects
+## 100K user objects
 
-### Instantanious ordering, filtering, pagination of 100K users
+### Instantanious ordering, filtering, pagination
 
-This BuenoCache example persists a collection of 100k _user-objects_ in an IndexedDB    
-  - Note: this cache service with proper transactions in place, will work with almost any persitence service.  I've used localStorage, IndexedDB, SQLite, and DenoKv.  To insure a _consistent cache_, all DB-mutations must be wrapped in a transaction. 
+BuenoCache is an extremely performant in-memory data service.     
+This example serves a collection of 100k _user-objects_ persisted in a local IndexedDB.    
+  - Note: this cache service will work with almost any persitence layer.  I've used localStorage, IndexedDB, SQLite, and DenoKv. To insure a _consistent cache_, all DB-mutations must be wrapped in a transaction. 
 
 ![alt text](table.png)
 
@@ -22,20 +23,20 @@ This BuenoCache example persists a collection of 100k _user-objects_ in an Index
 
   - This will run the app from Surge.    
   - The app will first build then hydrate an IndexedDB -> workDB -> ObjectStore    
-  - Any mutation of the data will be consistently persisted to this ObjectStore
+  - Any mutation of the cache data will be consistently persisted to this ObjectStore
 
 
 ## About this Proof Of Concept demo
 
  - All data is persisted and hydrated as a single key-value record in IndexedDB.    
  - The IndexedDB is managed by a worker thread. See: _./js/idbWorker.js_    
- - Data hydrates to an es6-Map using JSON.parse()    
- - The Map data is persisted in IndexedDB using JSON.stringyfy()    
- - Any mutation to buenoCache triggers a flush of the full dataset to IndexedDB.    
+ - Data hydrates to an es6-Map (cache) using JSON.parse()    
+ - The cache data is persisted in IndexedDB using JSON.stringyfy()    
+ - Any mutation to the cache triggers a flush of the full dataset to IndexedDB.    
  - You'll notice a very resposive UI, as most data ops are on a worker thread.    
- - I've tested with 5,000,000 records with no IndexedDB or UI issues.    
+ - I've tested with 5 million records with no IndexedDB or UI issues.    
 
-This example app demonstrates full **CRUD** of 100,000 user objects:
+This example app demonstrates full **CRUD** of the 100k user objects:
 ```js
 /** a `User` object ...*/
 User = {
