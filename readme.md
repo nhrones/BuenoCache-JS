@@ -9,7 +9,7 @@
 
 ## 100K user objects
 
-### Instantanious ordering, filtering, pagination
+### Instantaneous ordering, filtering, pagination
 
 BuenoCache is an extremely performant in-memory data service.     
 This example serves a collection of 100k _user-objects_ persisted in a local IndexedDB.    
