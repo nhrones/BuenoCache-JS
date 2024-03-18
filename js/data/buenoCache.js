@@ -34,7 +34,7 @@ const LOG = true
 export class BuenoCache {
 
    IDB_KEY = ''
-   schema 
+   schema
    nextMsgID = 0
    querySet = []
    callbacks
@@ -69,17 +69,17 @@ export class BuenoCache {
       this.size = opts.size
 
       // When we get a message from the worker we expect 
-      // an object containing {msgID, error, and result}.
-      // We find the callback that was registered for this msgID, 
+      // an object containing {txID, error, and result}.
+      // We find the callback that was registered for this transaction(txID), 
       // and call it with the error and result properities.
       // This will resolve or reject the promise that was
       // returned to the client when the callback was created.
       this.idbWorker.onmessage = (evt) => {
-         const { msgID, error, result } = evt.data    // unpack
-         if (!this.callbacks.has(msgID)) return      // check
-         const callback = this.callbacks.get(msgID)  // fetch
-         this.callbacks.delete(msgID)                // clean up
-         if (callback) callback(error, result)       // execute
+         const { txID, error, result } = evt.data     // unpack
+         if (!this.callbacks.has(txID)) return        // check
+         const callback = this.callbacks.get(txID)    // fetch
+         this.callbacks.delete(txID)                  // clean up
+         if (callback) callback(error, result)        // execute
       }
 
       // initial data fetch and hydrate
@@ -247,7 +247,7 @@ export class BuenoCache {
    }
 
    /* The `get` method will not mutate records */
-   
+
    /**
     * The `get` method will not mutate records
     *
@@ -280,23 +280,10 @@ export class BuenoCache {
       }
    }
 
-   /* 
-    * Post a message to our IDB webworker     
-    * 
-    * We give each message a unique id.    
-    * We then create/save a promise callback for the id.    
-    * Finally, we return a promise for this callback.   
-    * Our dbWorker will signal when the rpc has been fulfilled.   
-    * At that time we lookup our callback, and fulfill the promise.    
-    * This is how we implement async transactions with    
-    * our IndexedDB. Since most of the heavy lifting is    
-    * on the worker, we never block the UI 
-    */
-
    /**
     * Post a message to our IDB webworker     
     * 
-    * We give each message a unique id.    
+    * We give each message a unique transaction id.    
     * We then create/save a promise callback for the id.    
     * Finally, we return a promise for this callback.   
     * Our dbWorker will signal when the rpc has been fulfilled.   
@@ -305,7 +292,7 @@ export class BuenoCache {
     * our IndexedDB. Since most of the heavy lifting is    
     * on the worker, we never block the UI 
     *
-    * @param {*} newMessage
+    * @param {{ procedure: 'GET' | 'SET', key: string, value?: string }} newMessage
     * @returns {Promise<any>}
     */
    postMessage(newMessage) {

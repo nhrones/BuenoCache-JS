@@ -7,12 +7,12 @@ let objectStore = null;
 function post(callID, error, result) {
    if (error) {
       console.error("Worker caught an error:", error);
-      self.postMessage({ msgID: callID, error: { message: error.message }, result: null });
+      self.postMessage({ txID: callID, error: { message: error.message }, result: null });
    } else if (result === void 0) {
       console.info("Not Found!");
-      self.postMessage({ msgID: callID, error: null, result: "NOT FOUND" });
+      self.postMessage({ txID: callID, error: null, result: "NOT FOUND" });
    } else {
-      self.postMessage({ msgID: callID, error: null, result });
+      self.postMessage({ txID: callID, error: null, result });
    }
 }
 
