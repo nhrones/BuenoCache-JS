@@ -57,8 +57,7 @@ export class BuenoCache {
 
    /**
     *  BuenoCache ctor
-    * @param {{ schema: {  name: string, sample: {[key: string]: any}
-    * }, size: number; }} opts
+    * @param {{ schema: {  name: string, sample: {[key: string]: any}}, size: number; }} opts
     */
    constructor(opts) {
       this.IDB_KEY = `${opts.schema.name}-${opts.size}`
