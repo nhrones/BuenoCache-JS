@@ -16,9 +16,10 @@ This BuenoCache example persists a collection of 100k _user-objects_ in an Index
 
 ![alt text](table.png)
 
-### Click the link below to run this demo:   
+### Click the link below to run the above demo app:   
 
-https://bueno-cache.surge.sh    
+## https://bueno-cache.surge.sh    
+
   - This will run the app from Surge.    
   - The app will first build then hydrate an IndexedDB -> workDB -> ObjectStore    
   - Any mutation of the data will be consistently persisted to this ObjectStore
