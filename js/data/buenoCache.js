@@ -45,12 +45,21 @@ export class BuenoCache {
     * @type {Worker}
     */
    idbWorker
+
    size = 0
+
    /** @type {string | any[]} */
    columns = []
+
+   
+   /**
+    * @type {Map<number, string>} dbMap
+    */
    dbMap = new Map()
+
    /** @type {any[]} */
    raw = []
+
    currentPage = 1
    rows = 10
    window = 10
@@ -97,7 +106,7 @@ export class BuenoCache {
             })
          }
       })
-   }  // ctor end
+   }
 
    /**
     * extract a set of column-schema from the DB.schema object
@@ -125,7 +134,7 @@ export class BuenoCache {
     * Persist the current dbMap to an IndexedDB using         
     * our webworker. (takes ~ 90 ms for 100k records)    
     * This is called for any mutation of the dbMap (set/delete)
-    * @param {Map<string, any>} map
+    * @param {Map<number, any>} map
     */
    async persist(map) {
       console.log(`typeof map: ${typeof map}`)
@@ -183,7 +192,9 @@ export class BuenoCache {
       }
    }
 
-   /** resest the working querySet to original DB values */
+   /** 
+    * resest the working querySet to original DB values 
+    */
    resetData() {
       this.querySet = [...this.raw]
    }
@@ -228,7 +239,7 @@ export class BuenoCache {
     * The `set` method mutates - will call the `persist` method.
     *
     * @param {number} key
-    * @param {unknown} value
+    * @param {any} value
     * @returns {string}
     */
    set(key, value) {
@@ -244,8 +255,6 @@ export class BuenoCache {
          return 'Error ' + e
       }
    }
-
-   /* The `get` method will not mutate records */
 
    /**
     * The `get` method will not mutate records
