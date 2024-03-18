@@ -27,9 +27,9 @@ https://bueno-cache.surge.sh
 ## About this Proof Of Concept demo
 
  - All data is persisted and hydrated as a single key-value record in IndexedDB.    
- - The IndexedDB is managed by a worker thread. See: _./worker/idbWorker.js_    
+ - The IndexedDB is managed by a worker thread. See: _./js/idbWorker.js_    
  - Data hydrates to an es6-Map using JSON.parse()    
- - The Map data is persisted using JSON.stringyfy()    
+ - The Map data is persisted in IndexedDB using JSON.stringyfy()    
  - Any mutation to buenoCache triggers a flush of the full dataset to IndexedDB.    
  - You'll notice a very resposive UI, as most data ops are on a worker thread.    
  - I've tested with 5,000,000 records with no IndexedDB or UI issues.    
@@ -60,13 +60,12 @@ worker postMessage(id, value = JSON.stringify([...buenoCache.entries()]))
 
  ![alt text](buenoCache.png)
 
-You can appreciate the performance of this persisted cache, by deleting the IndexedDB     
-dataset while the app is running.    
+You can appreciate the performance of this persisted cache, by deleting the IndexedDB dataset while the app is running.    
 On the next mutation operation of buenoCache, the app will reconstruct the IndexedDB row.   
 This is imperceptible to the UX, as this is mostly off-UI-thread.   
     
 If you then again delete the IndexedDB row, and then _refresh the page_, you'll see a     
-_creation_ message on restart. It will take < 250ms to create and persist    
+_creation_ message on restart. It will take < 250ms to recreate and persist    
 a _new_ set of (100,000 user objects, ~ 7.6 MB in IDB).    
   
 ### With the app running:     
@@ -80,17 +79,12 @@ a _new_ set of (100,000 user objects, ~ 7.6 MB in IDB).
    A flush takes < 100ms for 100k user objects, most of this time is in the worker.   
    
    Note: Table cells are editable.     
-   Any _cell-blur_, forces a mutation of the buenoCache.  This mutation then forces 
-   a DB flush. Note that the _id_ cell is not editable.
+   Any _cell-blur_, forces a mutation of the buenoCache.  This mutation then forces a DB flush. Note that the _id_ cell (primary key) is not editable.
 
-   Whenever you _select_ a cell in a row, the row and cell will be highlighted.   
-   Also, a _delete_ button (**X**) will show at the botton on the table.    
+   Whenever you _select_ a cell in a row, the row and cell will be highlighted, and a _delete_ button (**X**) will show at the botton on the table.    
    You can _click_ this button to delete the selected row.   
  
-   See the red arrow below.    
-        
-   ![BuenoCache](./buenoCache.png)
-   
+ 
    ## About the UI
    The table headers allow _ordering_ and _filtering_ on each column.    
    Please note the performance of the es6-Map-based cache.     
@@ -101,5 +95,4 @@ a _new_ set of (100,000 user objects, ~ 7.6 MB in IDB).
    ## What I've learned:
    The thing that impressed me the most, is how _incredibly fast_ V8-JSON is!    
    I was also impressed with how well _es6-Maps_ work as a database cache.    
-   I've tried many different data transfer methods between the ui-thread and the worker.     
-   I was surprised that transfering / persisting a single json string is extremely efficient.
+   I've tried many different data transfer methods between the ui-thread and the worker, and was surprised that transfering / persisting a single json string is extremely efficient.
