@@ -4,6 +4,8 @@
   - Local async IDB persistence layer
   - Zero dependencies
   - Zero network requirements
+![alt text](LocalFirst.png)
+
 
 ### 100K user objects
 
