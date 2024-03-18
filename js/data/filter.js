@@ -4,8 +4,6 @@ import {buenoCache } from '../main.js'
 import { applyOrder} from './order.js'
 import { paginateData } from './paginate.js'
 
-
-
 /**
  * filter our dataSet
  *

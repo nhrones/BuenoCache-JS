@@ -1,6 +1,4 @@
-///// <reference lib="dom" />
-     
-//import { dbOptions, schema } from './data/types.ts'
+
 import { initDOMelements } from './view/domEventHandlers.js'
 import { BuenoCache } from './data/buenoCache.js'  
   

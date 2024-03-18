@@ -30,7 +30,9 @@ export const orderData = (column, direction) => {
    }
 }
 
-// apply any existing sort order 
+/** 
+ * apply any existing sort order 
+ */
 export const applyOrder = () => {
    const indicators = document.querySelectorAll('.indicator')
    for (const ind of Array.from(indicators)) {

@@ -4,14 +4,25 @@ import { buildPageButtons, } from './domPageButtons.js'
 import { $, buenoCache } from '../main.js'
 import { paginateData } from '../data/paginate.js'
 
+/** 
+ * @module domDataTable
+ * @description  This module is a template constructor module
+ * Using simple template fragments, we construct a DOM datatable.
+ * @abstract - This module leverages JSDoc comments for type checking.
+ * 
+ * @function buildTableHead - builds the head section of our datatable.
+ * @function buildDataTable - builds the datatable.
+ */
+
+
 /** @type {HTMLTableSectionElement} */
 let tableBody
 
 /**
- * capitalizeFirstLetter
+ * Capitalize First Letter
  *
- * @param {string} str
- * @returns {string}
+ * @param {string} str the string to capitalize
+ * @returns {string} capitalized string
  */
 function capitalizeFirstLetter(str) {
    return str.charAt(0).toUpperCase() + str.slice(1);
@@ -38,7 +49,9 @@ export const buildTableHead = () => {
    tablehead.innerHTML += `</tr>`
 }
 
-/** build HTML table */
+/** 
+ * build and HTML table 
+ */
 export const buildDataTable = () => {
 
    if (!tableBody) {

@@ -1,6 +1,15 @@
 
 import { $, buenoCache } from '../main.js'
 
+/** 
+ * @module editableTR
+ * @description  makes a dataTable row editable.
+ * @abstract - This module leverages JSDoc comments for type checking.
+ * 
+ * @function resetFocusedRow - reset any currently focused row
+ * @function makeEditableRow - build table row event handlers for editing
+ */
+
 /** @type {HTMLTableRowElement | null} */
 export let focusedRow
 
@@ -9,6 +18,10 @@ export let focusedCell
 
 export let selectedRowID = 0
 
+
+/**
+ * reset any focused row
+ */
 export const resetFocusedRow = () => {
     const dbtn = $('deletebtn')
     dbtn?.setAttribute('hidden', '')
@@ -16,7 +29,9 @@ export const resetFocusedRow = () => {
     focusedRow = null
 }
 
-/** build table row event handlers for editing */
+/** 
+ * build table row event handlers for editing 
+ */
 export function makeEditableRow() {
     const rows = document.querySelectorAll('tr')
     for (const row of Array.from(rows)) {

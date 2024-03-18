@@ -4,6 +4,14 @@ import { focusedRow } from './editableTR.js'
 import { $, buenoCache } from '../main.js'
 import { paginateData } from '../data/paginate.js'
 
+/** 
+ * @module domPageButtons
+ * @description  Builds all required pagination button elements
+ * as well as the required click event handlers.
+ * @abstract - This module leverages JSDoc comments for type checking.
+ * 
+ * @function buildPageButtons - builds all required pagination button elements
+ */
 
 /** @type {HTMLElement} */
 let wrapper

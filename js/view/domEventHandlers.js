@@ -6,10 +6,23 @@ import { OrderDirection } from '../data/order.js'
 import { $, buenoCache } from '../main.js'
 import { buildDataTable, buildTableHead } from './domDataTable.js'
 
+/** 
+ * @module domEventHandlers
+ * @description  This module initialized DOM objects and their event handlers
+ * @abstract - This module leverages JSDoc comments for type checking.
+ * 
+ * @function resetIndicators - resets Order indicator elements
+ * @function initDOMelements - initializes DOM objects and event handlers.
+ */
+
+
 const UP = '🔼'
 const DOWN = '🔽'
 const UNORDERED = '🔃'
 
+/**
+ * resets Order indicator elements
+ */
 const resetIndicators = () => {
    const indicators = document.querySelectorAll('.indicator')
    for (const indicator of Array.from(indicators)) {
@@ -22,13 +35,17 @@ const resetIndicators = () => {
    }
 }
 
-/** Initialize DOM elements, and attach common event handlers */
+/** 
+ * Initialize DOM elements, and attach common event handlers 
+ */
 export const initDOMelements = () => {
 
-   // build the table head section
+   // build the table head section first
    buildTableHead()
 
-   /** the currently focused header input element */
+   /** 
+    * the currently focused header input element 
+    */
    let focusedInput
 
    // assign click handlers for column headers

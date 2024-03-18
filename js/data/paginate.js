@@ -1,7 +1,9 @@
 
 import { buenoCache } from '../main.js'
 
-/** paginate the querySet data */
+/** 
+ * paginate the querySet data 
+ */
 export function paginateData() {
     if (buenoCache.querySet) {
         const { currentPage, rows } = buenoCache
