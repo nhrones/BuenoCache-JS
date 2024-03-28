@@ -26,7 +26,6 @@ const UNORDERED = '🔃'
 const resetIndicators = () => {
    const indicators = document.querySelectorAll('.indicator')
    for (const indicator of Array.from(indicators)) {
-      /** @type {HTMLElement} */
       const parent = /** @type {HTMLElement} */(indicator.parentElement);
       /** @type {DOMStringMap} */
       const { index } = /**@type {{index: string}}*/(parent.dataset)
@@ -50,8 +49,7 @@ export const initDOMelements = () => {
 
    // assign click handlers for column headers
    for (let i = 0; i < buenoCache.columns.length; i++) {
-      
-      /** @type {HTMLElement} */
+
       const el = /** @type {HTMLElement} */($(`header${i + 1}`))
       el.onclick = (e) => {
          const { tagName } = /** @type {HTMLElement} */(e.target)

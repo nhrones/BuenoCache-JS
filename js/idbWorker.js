@@ -3,11 +3,18 @@ const DB_NAME = "workDB";
 const STORE_NAME = "ObjectStore";
 let objectStore = null;
 
+//TODO typedef for msg id, err, result
 
+/**
+ * Post a message
+ * @param {number} callID
+ * @param {string | null} error
+ * @param {any} result
+ */
 function post(callID, error, result) {
    if (error) {
       console.error("Worker caught an error:", error);
-      self.postMessage({ txID: callID, error: { message: error.message }, result: null });
+      self.postMessage({ txID: callID, error: error, result: null });
    } else if (result === void 0) {
       console.info("Not Found!");
       self.postMessage({ txID: callID, error: null, result: "NOT FOUND" });
@@ -15,6 +22,7 @@ function post(callID, error, result) {
       self.postMessage({ txID: callID, error: null, result });
    }
 }
+
 
 self.onmessage = function (evt) {
    const data = evt.data;

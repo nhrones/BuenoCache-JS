@@ -41,8 +41,7 @@ export function makeEditableRow() {
         }
 
         row.onclick = (e) => {
-            
-            /** @type {HTMLTableCellElement} */
+
             const target = /** @type {HTMLTableCellElement} */(e.target)
             if (focusedRow && focusedCell && (e.target != focusedCell)) {
                focusedCell.removeAttribute('contenteditable')

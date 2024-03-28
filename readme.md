@@ -19,7 +19,7 @@ This example serves a collection of 100k _user-objects_ persisted in a local Ind
 
 ### Click the link below to run the above demo app:   
 
-## https://bueno-cache.surge.sh    
+## https://nhrones.github.io/BuenoCache-JS/   
 
   - This will run the app from Surge.    
   - The app will first build then hydrate an IndexedDB -> workDB -> ObjectStore    
