@@ -21,20 +21,20 @@ This example serves a collection of 100k _user-objects_ persisted in a local Ind
 
 ## https://nhrones.github.io/BuenoCache-JS/   
 
-  - This will run the app from Surge.    
+  - This will run the app from Github Pages.    
   - The app will first build then hydrate an IndexedDB -> workDB -> ObjectStore    
-  - Any mutation of the cache data will be consistently persisted to this ObjectStore
+  - Any mutation of the bueno-cache will be consistently persisted to this ObjectStore
 
 
 ## About this Proof Of Concept demo
 
  - All data is persisted and hydrated as a single key-value record in IndexedDB.    
  - The IndexedDB is managed by a worker thread. See: _./js/idbWorker.js_    
- - Data hydrates to an es6-Map (cache) using JSON.parse()    
- - The cache data is persisted in IndexedDB using JSON.stringyfy()    
- - Any mutation to the cache triggers a flush of the full dataset to IndexedDB.    
- - You'll notice a very resposive UI, as most data ops are on a worker thread.    
- - I've tested with 5 million records with no IndexedDB or UI issues.    
+ - Data hydrates to an es6-Map (bueno-cache) using JSON.parse()    
+ - The bueno-cache data is persisted in IndexedDB using JSON.stringyfy()    
+ - Any mutation to bueno-cache triggers a flush of the full dataset to IndexedDB.    
+ - You'll notice a very resposive UI, as IDB ops are on a worker thread.    
+ - I've tested with 5 million records with no IDB or UI issues.    
 
 This example app demonstrates full **CRUD** of the 100k user objects:
 ```js
@@ -63,10 +63,10 @@ worker postMessage(id, value = JSON.stringify([...buenoCache.entries()]))
  ![alt text](buenoCache.png)
 
 You can appreciate the performance of this persisted cache, by deleting the IndexedDB dataset while the app is running.    
-On the next mutation operation of buenoCache, the app will reconstruct the IndexedDB row.   
+On the next mutation operation of bueno-cache, the app will reconstruct the IndexedDB.   
 This is imperceptible to the UX, as this is mostly off-UI-thread.   
     
-If you then again delete the IndexedDB row, and then _refresh the page_, you'll see a     
+If you once again delete the IndexedDB, and then _refresh the page_, you'll see a     
 _creation_ message on restart. It will take < 250ms to recreate and persist    
 a _new_ set of (100,000 user objects, ~ 7.6 MB in IDB).    
   
