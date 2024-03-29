@@ -1,8 +1,8 @@
 # BuenoCache
 ## A _LocalFirst_ example application
-  - Pure vanilla HTML, CSS, javascript application
-  - Local async IDB persistence layer
-  - Zero dependencies
+  - Pure vanilla HTML, CSS, javascript application - no frameworks
+  - Local async IDB persistence service
+  - Zero dependencies -- no Node, no Deno, None, Nada
   - Zero network requirements
 ![alt text](LocalFirst.png)
 
