@@ -2,8 +2,8 @@
 ## A _LocalFirst_ example application
   - Pure vanilla HTML, CSS, javascript application - no frameworks
   - Local async IDB persistence service
-  - Zero dependencies -- no Node, no Deno, no Typescript, None, Nada
-  - Zero network requirements
+  - Zero dependencies -- no Node, no Deno, no Bun, no Typescript, None, Nada
+  - Zero network requirements, statically servered from Github Pages
 ![alt text](LocalFirst.png)
 
 
