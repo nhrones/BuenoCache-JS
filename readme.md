@@ -3,7 +3,7 @@
   - Pure vanilla HTML, CSS, javascript application - no frameworks
   - Local async IDB persistence service
   - Zero dependencies -- no Node, no Deno, no Bun, no Typescript, None, Nada
-  - Zero network requirements, statically servered from Github Pages
+  - Zero network requirements, statically served from Github Pages
 ![alt text](LocalFirst.png)
 
 
