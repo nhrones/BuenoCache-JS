@@ -1,29 +1,29 @@
 {
-   "build": {
-      "BundleName": "bundle.js",
-      "Entry": [
-         "./src/main.ts"
-      ],
-      "Minify": false,
-      "Out": "dist"
-   },
-   "simple": {
-      "DEV": true,
-      "Port": 8080,
-      "Serve": ""
-   },
-   "hot": {
-      "DEV": true,
-      "Entry": [
-         "./src/main.ts"
-      ],
-      "Minify": false,
-      "Out": "dist",
-      "Port": 80,
-      "Serve": "",
-      "Watch": [
-         "src",
-         "dist"
-      ]
-   }
+    "build": {
+        "BundleName": "bundle.js",
+        "Entry": [
+            "./src/main.ts"
+        ],
+        "Minify": false,
+        "Out": "dist"
+    },
+    "simple": {
+        "DEV": true,
+        "Port": 8080,
+        "Serve": ""
+    },
+    "hot": {
+        "DEV": true,
+        "Entry": [
+            "./src/main.ts"
+        ],
+        "Minify": false,
+        "Out": "dist",
+        "Port": 80,
+        "Serve": "",
+        "Watch": [
+            "src",
+            "dist"
+        ]
+    }
 }
