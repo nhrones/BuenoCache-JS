@@ -1,4 +1,3 @@
 {
-   "deno.enable": true,
-   "deno.disablePaths": ["./dist","./.vscode", "./data"],
-}
+   "js/ts.implicitProjectConfig.checkJs": true
+ }
